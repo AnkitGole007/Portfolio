@@ -154,20 +154,19 @@ body {
 /* ============================================
    ANIMATED GRADIENT BORDER
    Using @property for smooth hue animation
+   Note: Only use on elements that already have their own background
    ============================================ */
-.animated-border {
-  --border-progress: 0%;
+.animated-border-wrapper {
   position: relative;
   border-radius: 24px;
-  background: oklch(0.1 0.02 260);
 }
 
-.animated-border::before {
+.animated-border-wrapper::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: -2px;
   border-radius: inherit;
-  padding: 1px;
+  padding: 2px;
   background: conic-gradient(
     from var(--gradient-angle),
     var(--accent-blue),
@@ -181,6 +180,7 @@ body {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: rotate-gradient 4s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes rotate-gradient {

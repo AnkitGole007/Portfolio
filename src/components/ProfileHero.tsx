@@ -30,9 +30,6 @@ export default function ProfileHero() {
         transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         className="relative inline-block mb-8"
       >
-        {/* Animated gradient rings using CSS @property */}
-        <div className="absolute -inset-3 rounded-full animated-border opacity-60" />
-
         {/* Orbiting ring 1 */}
         <motion.div
           animate={{ rotate: 360 }}

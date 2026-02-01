@@ -25,7 +25,7 @@ interface Shortcut {
 
 const shortcuts: Shortcut[] = [
   {
-    icon: <User size={20} />,
+    icon: <User size={26} />,
     label: 'About',
     wittyText: 'The human behind the algorithms',
     href: '/about',
@@ -33,7 +33,7 @@ const shortcuts: Shortcut[] = [
     delay: 0.1,
   },
   {
-    icon: <FolderKanban size={20} />,
+    icon: <FolderKanban size={26} />,
     label: 'Projects',
     wittyText: 'Where ideas become commits',
     href: '/projects',
@@ -41,7 +41,7 @@ const shortcuts: Shortcut[] = [
     delay: 0.2,
   },
   {
-    icon: <Briefcase size={20} />,
+    icon: <Briefcase size={26} />,
     label: 'Experience',
     wittyText: 'From intern to AI whisperer',
     href: '/experience',
@@ -49,7 +49,7 @@ const shortcuts: Shortcut[] = [
     delay: 0.3,
   },
   {
-    icon: <Cpu size={20} />,
+    icon: <Cpu size={26} />,
     label: 'Skills',
     wittyText: 'My neural network stack',
     href: '/skills',
@@ -57,7 +57,7 @@ const shortcuts: Shortcut[] = [
     delay: 0.4,
   },
   {
-    icon: <Trophy size={20} />,
+    icon: <Trophy size={26} />,
     label: 'Achievements',
     wittyText: 'Milestones collected',
     href: '/achievements',
@@ -65,7 +65,7 @@ const shortcuts: Shortcut[] = [
     delay: 0.5,
   },
   {
-    icon: <Mail size={20} />,
+    icon: <Mail size={26} />,
     label: 'Contact',
     wittyText: 'Ping my inbox',
     href: '/contact',
@@ -76,7 +76,7 @@ const shortcuts: Shortcut[] = [
 
 const socialLinks: Shortcut[] = [
   {
-    icon: <Github size={18} />,
+    icon: <Github size={24} />,
     label: 'GitHub',
     wittyText: 'My code sanctuary',
     href: 'https://github.com/AnkitGole007',
@@ -85,7 +85,7 @@ const socialLinks: Shortcut[] = [
     external: true,
   },
   {
-    icon: <Linkedin size={18} />,
+    icon: <Linkedin size={24} />,
     label: 'LinkedIn',
     wittyText: 'Professional persona',
     href: 'https://linkedin.com/in/ankit-gole',
@@ -132,18 +132,20 @@ function FloatingShortcut({ shortcut }: FloatingShortcutProps) {
       }}
       whileHover={{ scale: 1.08, y: -3 }}
       whileTap={{ scale: 0.95 }}
-      className="absolute glass rounded-xl p-3 flex flex-col items-center gap-1.5 cursor-pointer
-                 hover:glow-soft transition-all duration-300 group min-w-[100px]"
+      className="absolute glass rounded-2xl p-4 flex flex-col items-center gap-2 cursor-pointer
+                 hover:glow-soft transition-all duration-300 group min-w-[120px]"
       style={{
         left: `calc(50% + ${shortcut.position.x}%)`,
         top: `calc(50% + ${shortcut.position.y}%)`,
         transform: 'translate(-50%, -50%)',
       }}
     >
-      <div className="text-[#0a84ff] group-hover:text-[#5e5ce6] transition-colors">
-        {shortcut.icon}
+      <div className="p-2.5 rounded-xl bg-[var(--accent-blue)]/10 group-hover:bg-[var(--accent-purple)]/15 transition-all">
+        <span className="text-[var(--accent-blue)] group-hover:text-[var(--accent-purple)] transition-colors block">
+          {shortcut.icon}
+        </span>
       </div>
-      <span className="text-white/90 font-medium text-xs">{shortcut.label}</span>
+      <span className="text-white/90 font-medium text-sm">{shortcut.label}</span>
       <motion.span
         initial={{ opacity: 0, height: 0 }}
         whileHover={{ opacity: 1, height: 'auto' }}

@@ -1,9 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import ProfileHero from '@/components/ProfileHero';
-import OrbitalNavigation from '@/components/OrbitalNavigation';
 import LinkedInHighlights from '@/components/LinkedInHighlights';
+
+// Lazy load 3D component to improve initial load time
+const OrbitalNavigation = dynamic(() => import('@/components/OrbitalNavigation'), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 flex items-center justify-center">
+      <div className="text-white/30 text-sm">Loading 3D scene...</div>
+    </div>
+  ),
+});
 import GeminiChat from '@/components/GeminiChat';
 import CommandPalette from '@/components/CommandPalette';
 import LoadingScreen from '@/components/LoadingScreen';

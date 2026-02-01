@@ -3,14 +3,14 @@
 import SectionLayout from '@/components/SectionLayout';
 import { motion } from 'framer-motion';
 import {
-  ExternalLink,
   Github,
   Bot,
   Gamepad2,
   Image as ImageIcon,
   Brain,
   Search,
-  Calendar
+  Calendar,
+  ArrowUpRight
 } from 'lucide-react';
 
 const projects = [
@@ -22,11 +22,12 @@ const projects = [
     description: 'End-to-end agentic workflow for RAG-guided resume tailoring, cutting manual edits ~90% and lifting ATS alignment +35%.',
     highlights: [
       'Chrome MV3 extension + n8n + FastAPI + Qdrant + Ollama (Llama-3.1/Mistral)',
-      '~95% field accuracy across LinkedIn/Indeed with ~80% automation coverage over 500+ postings',
+      '~95% field accuracy across LinkedIn/Indeed with ~80% automation coverage',
       '0.89 cosine JD-Resume relevance with recruiter-style critiques',
     ],
     tech: ['Chrome Extension', 'n8n', 'FastAPI', 'Qdrant', 'Ollama', 'RAG'],
     color: '#0a84ff',
+    gradient: 'from-[#0a84ff] to-[#5e5ce6]',
   },
   {
     id: 2,
@@ -39,9 +40,10 @@ const projects = [
       '35% iteration time reduction via LoRA adapter extraction',
       'Production-minded: bounded tools, explicit handoffs, replayable traces',
     ],
-    tech: ['Unity', 'PyTorch', 'Diffusion', 'LoRA', 'Wave Function Collapse', 'Multi-Agent'],
+    tech: ['Unity', 'PyTorch', 'Diffusion', 'LoRA', 'Multi-Agent'],
     github: 'https://github.com/AnkitGole007',
     color: '#5e5ce6',
+    gradient: 'from-[#5e5ce6] to-[#bf5af2]',
   },
   {
     id: 3,
@@ -57,6 +59,7 @@ const projects = [
     tech: ['PyTorch', 'GAN', 'ONNX', 'TensorRT', 'CUDA'],
     github: 'https://github.com/AnkitGole007',
     color: '#bf5af2',
+    gradient: 'from-[#bf5af2] to-[#ff375f]',
   },
   {
     id: 4,
@@ -67,11 +70,12 @@ const projects = [
     highlights: [
       '6-9 point Dice improvement validated across held-out slices',
       '~18-25% false positive reduction with 3.2x experiment turnaround',
-      '22% VRAM improvement via gradient checkpointing and mixed precision',
+      '22% VRAM improvement via gradient checkpointing',
     ],
-    tech: ['CycleGAN', 'Diffusion', 'Medical Imaging', 'PyTorch', 'Mixed Precision'],
+    tech: ['CycleGAN', 'Diffusion', 'Medical Imaging', 'PyTorch'],
     github: 'https://github.com/AnkitGole007',
     color: '#30d158',
+    gradient: 'from-[#30d158] to-[#0a84ff]',
   },
   {
     id: 5,
@@ -81,41 +85,46 @@ const projects = [
     description: 'User behavior modeling + graph analytics for fraud detection using DistilBERT and Neo4j.',
     highlights: [
       '32.2% sentiment-rating mismatches detected across 5,000 reviews',
-      '15.0% high-rated entities with low positive sentiment surfaced via Neo4j',
-      'Prioritized risk nodes using semantic similarity and time-window rules',
+      '15.0% high-rated entities with low positive sentiment surfaced',
+      'Prioritized risk nodes using semantic similarity',
     ],
-    tech: ['Neo4j', 'DistilBERT', 'Sentence Transformers', 'Graph Analytics', 'Fraud Detection'],
+    tech: ['Neo4j', 'DistilBERT', 'Graph Analytics', 'Fraud Detection'],
     github: 'https://github.com/AnkitGole007',
     color: '#ff375f',
+    gradient: 'from-[#ff375f] to-[#ff9500]',
   },
 ];
 
 export default function ProjectsPage() {
   return (
     <SectionLayout title="Projects" subtitle="Where ideas become commits">
-      <div className="space-y-6">
+      <div className="grid gap-6">
         {projects.map((project, idx) => (
           <motion.div
             key={project.id}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: idx * 0.1 }}
-            className="glass rounded-3xl p-8 group hover:glow transition-all duration-500"
+            className="group card-futuristic p-8 hover:glow-soft transition-all duration-500"
           >
+            {/* Gradient top border */}
+            <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${project.gradient} opacity-60`} />
+
             {/* Header */}
             <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-6">
               <div className="flex items-start gap-4">
-                <div
-                  className="p-3 rounded-xl transition-colors"
-                  style={{ backgroundColor: `${project.color}20` }}
+                <motion.div
+                  whileHover={{ rotate: 5, scale: 1.1 }}
+                  className="p-4 rounded-2xl"
+                  style={{ backgroundColor: `${project.color}15` }}
                 >
                   <span style={{ color: project.color }}>{project.icon}</span>
-                </div>
+                </motion.div>
                 <div>
-                  <h3 className="text-xl font-semibold text-white group-hover:text-[#0a84ff] transition-colors">
+                  <h3 className="text-xl font-semibold text-white group-hover:gradient-text-accent transition-all duration-300">
                     {project.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-white/50 text-sm mt-1">
+                  <div className="flex items-center gap-2 text-white/40 text-sm mt-1">
                     <Calendar size={14} />
                     <span>{project.period}</span>
                   </div>
@@ -123,48 +132,54 @@ export default function ProjectsPage() {
               </div>
 
               {/* Links */}
-              <div className="flex gap-2">
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white/5 border border-white/10
-                             hover:border-[#0a84ff]/50 hover:bg-[#0a84ff]/10
-                             transition-all duration-300 text-white/70 hover:text-white"
-                  >
-                    <Github size={18} />
-                  </a>
-                )}
-              </div>
+              {project.github && (
+                <motion.a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl glass
+                           text-white/60 hover:text-white transition-colors"
+                >
+                  <Github size={16} />
+                  <span className="text-sm">View Code</span>
+                  <ArrowUpRight size={14} />
+                </motion.a>
+              )}
             </div>
 
             {/* Description */}
-            <p className="text-white/70 leading-relaxed mb-6">{project.description}</p>
+            <p className="text-white/70 leading-relaxed mb-6 text-center md:text-left">
+              {project.description}
+            </p>
 
             {/* Highlights */}
-            <div className="space-y-2 mb-6">
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
               {project.highlights.map((highlight, hIdx) => (
-                <div key={hIdx} className="flex items-start gap-3">
+                <div
+                  key={hIdx}
+                  className="p-4 rounded-xl bg-white/[0.02] border border-white/5"
+                >
                   <div
-                    className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0"
+                    className="w-1.5 h-1.5 rounded-full mb-3"
                     style={{ backgroundColor: project.color }}
                   />
-                  <p className="text-white/50 text-sm">{highlight}</p>
+                  <p className="text-white/50 text-sm leading-relaxed">{highlight}</p>
                 </div>
               ))}
             </div>
 
             {/* Tech Stack */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start">
               {project.tech.map((tech) => (
                 <span
                   key={tech}
-                  className="px-3 py-1.5 rounded-full text-xs font-medium
-                           border transition-colors"
+                  className="tech-tag px-4 py-1.5 rounded-full text-xs font-medium
+                           border transition-all duration-300"
                   style={{
-                    backgroundColor: `${project.color}10`,
-                    borderColor: `${project.color}30`,
+                    backgroundColor: `${project.color}08`,
+                    borderColor: `${project.color}25`,
                     color: project.color,
                   }}
                 >

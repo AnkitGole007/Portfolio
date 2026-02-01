@@ -23,54 +23,24 @@ export default function ProfileHero() {
       transition={{ duration: 0.6 }}
       className="text-center z-10 relative"
     >
-      {/* Profile Image with Animated Border */}
+      {/* Profile Image */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         className="relative inline-block mb-8"
       >
-        {/* Orbiting ring 1 */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute -inset-5 rounded-full"
-          style={{
-            border: '1px solid oklch(0.65 0.2 250 / 0.25)',
-          }}
-        />
-
-        {/* Orbiting ring 2 */}
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-          className="absolute -inset-7 rounded-full"
-          style={{
-            border: '1px solid oklch(0.55 0.22 280 / 0.15)',
-          }}
-        />
-
-        {/* Orbiting ring 3 */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
-          className="absolute -inset-9 rounded-full"
-          style={{
-            border: '1px solid oklch(0.6 0.25 310 / 0.1)',
-          }}
-        />
-
         {/* Pulsing glow effect */}
         <div
-          className="absolute inset-0 rounded-full blur-2xl glow-pulse"
+          className="absolute -inset-4 rounded-full blur-2xl glow-pulse"
           style={{
             background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-violet))',
-            opacity: 0.4,
+            opacity: 0.5,
           }}
         />
 
         {/* Image container with glass effect */}
-        <div className="relative w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden glass-strong">
+        <div className="relative w-32 h-32 md:w-36 md:h-36 rounded-full overflow-hidden glass-strong border-2 border-white/10">
           <Image
             src={`${basePath}/profile.jpeg`}
             alt="Ankit Gole"

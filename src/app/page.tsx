@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ProfileHero from '@/components/ProfileHero';
-import FloatingShortcuts from '@/components/FloatingShortcuts';
+import OrbitalNavigation from '@/components/OrbitalNavigation';
 import LinkedInHighlights from '@/components/LinkedInHighlights';
 import GeminiChat from '@/components/GeminiChat';
 import CommandPalette from '@/components/CommandPalette';
@@ -40,10 +40,14 @@ export default function Home() {
       <CommandPalette isOpen={isCommandOpen} onClose={() => setIsCommandOpen(false)} />
 
       <main className="relative min-h-screen overflow-hidden bg-[var(--background)]">
-        {/* Main Content */}
-        <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
-          <ProfileHero />
-          <FloatingShortcuts />
+        {/* 3D Orbital Navigation */}
+        <OrbitalNavigation />
+
+        {/* Profile Hero - Centered overlay */}
+        <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
+          <div className="pointer-events-auto">
+            <ProfileHero />
+          </div>
         </div>
 
         {/* LinkedIn Highlights */}

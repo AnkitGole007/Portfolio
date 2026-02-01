@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 interface TypingEffectProps {
   texts: string[];
   className?: string;
+  style?: React.CSSProperties;
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseTime?: number;
@@ -14,6 +15,7 @@ interface TypingEffectProps {
 export default function TypingEffect({
   texts,
   className = '',
+  style,
   typingSpeed = 100,
   deletingSpeed = 50,
   pauseTime = 2000,
@@ -46,12 +48,13 @@ export default function TypingEffect({
   }, [currentText, isDeleting, currentTextIndex, texts, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
-    <span className={className}>
+    <span className={className} style={style}>
       {currentText}
       <motion.span
         animate={{ opacity: [1, 0] }}
         transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse' }}
-        className="inline-block w-[3px] h-[1em] bg-[#0a84ff] ml-1 align-middle"
+        className="inline-block w-[3px] h-[1em] ml-1 align-middle"
+        style={{ backgroundColor: 'var(--accent-blue)' }}
       />
     </span>
   );

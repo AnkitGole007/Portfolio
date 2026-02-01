@@ -1,14 +1,63 @@
 @import "tailwindcss";
 
+/* ============================================
+   MODERN CSS PORTFOLIO - 2026 Edition
+   Using: OKLCH, @property, Container Queries,
+   Scroll-driven Animations, Mesh Gradients
+   ============================================ */
+
+/* CSS Custom Properties with @property for animation */
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --gradient-position {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+@property --hue-rotate {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@property --glow-opacity {
+  syntax: "<number>";
+  initial-value: 0.3;
+  inherits: false;
+}
+
+@property --border-progress {
+  syntax: "<percentage>";
+  initial-value: 0%;
+  inherits: false;
+}
+
+/* Modern OKLCH Color System - More vibrant & perceptually uniform */
 :root {
-  --background: #030304;
-  --foreground: #f5f5f7;
-  --accent: #0a84ff;
-  --accent-secondary: #5e5ce6;
-  --accent-tertiary: #bf5af2;
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: rgba(0, 0, 0, 0.5);
+  /* Base colors in OKLCH (Lightness, Chroma, Hue) */
+  --background: oklch(0.08 0.01 260);
+  --foreground: oklch(0.97 0.01 260);
+
+  /* Accent colors - More vibrant with OKLCH */
+  --accent-blue: oklch(0.65 0.2 250);
+  --accent-purple: oklch(0.55 0.22 280);
+  --accent-violet: oklch(0.6 0.25 310);
+  --accent-green: oklch(0.7 0.2 145);
+  --accent-amber: oklch(0.75 0.18 70);
+
+  /* Glass effect tokens */
+  --glass-bg: oklch(0.12 0.02 260 / 0.85);
+  --glass-border: oklch(1 0 0 / 0.12);
+  --glass-highlight: oklch(1 0 0 / 0.08);
+
+  /* Dynamic gradient hue - animatable via @property */
+  --gradient-angle: 135deg;
+  --gradient-position: 0%;
 }
 
 * {
@@ -17,68 +66,172 @@
   margin: 0;
 }
 
-html,
+html {
+  scroll-behavior: smooth;
+  /* Enable scroll-driven animations */
+  scroll-timeline: --page-scroll block;
+}
+
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  min-height: 100vh;
   background: var(--background);
   color: var(--foreground);
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
 }
 
-body {
-  min-height: 100vh;
+/* ============================================
+   MESH GRADIENT BACKGROUND
+   Modern multi-point gradient with animation
+   ============================================ */
+.mesh-gradient-bg {
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(10, 132, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 0% 50%, rgba(94, 92, 230, 0.05) 0%, transparent 40%),
-    radial-gradient(ellipse at 100% 50%, rgba(191, 90, 242, 0.05) 0%, transparent 40%),
+    radial-gradient(ellipse 80% 50% at 20% 20%, oklch(0.5 0.15 250 / 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 30%, oklch(0.45 0.18 280 / 0.12), transparent),
+    radial-gradient(ellipse 50% 60% at 50% 80%, oklch(0.5 0.2 310 / 0.1), transparent),
+    radial-gradient(ellipse 40% 40% at 90% 70%, oklch(0.6 0.15 145 / 0.08), transparent),
     var(--background);
+  animation: mesh-shift 20s ease-in-out infinite;
 }
 
-/* Enhanced Liquid Glass Effect - More solid for better readability */
+@keyframes mesh-shift {
+  0%, 100% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 90% 70%;
+  }
+  25% {
+    background-position: 20% 20%, 80% 10%, 40% 90%, 85% 75%;
+  }
+  50% {
+    background-position: 10% 30%, 90% 20%, 60% 85%, 80% 65%;
+  }
+  75% {
+    background-position: 25% 15%, 75% 25%, 45% 95%, 95% 60%;
+  }
+}
+
+/* ============================================
+   MODERN GLASS MORPHISM
+   Enhanced with OKLCH and layered effects
+   ============================================ */
 .glass {
-  background: linear-gradient(
-    135deg,
-    rgba(20, 20, 25, 0.85) 0%,
-    rgba(15, 15, 20, 0.80) 50%,
-    rgba(10, 10, 15, 0.75) 100%
-  );
+  --glass-lightness: 0.12;
+  background:
+    linear-gradient(
+      135deg,
+      oklch(calc(var(--glass-lightness) + 0.02) 0.02 260 / 0.9) 0%,
+      oklch(var(--glass-lightness) 0.015 260 / 0.85) 50%,
+      oklch(calc(var(--glass-lightness) - 0.02) 0.01 260 / 0.8) 100%
+    );
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid oklch(1 0 0 / 0.1);
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+    0 8px 32px oklch(0 0 0 / 0.4),
+    inset 0 1px 0 oklch(1 0 0 / 0.08),
+    inset 0 -1px 0 oklch(1 0 0 / 0.02);
 }
 
 .glass-strong {
-  background: linear-gradient(
-    135deg,
-    rgba(25, 25, 32, 0.92) 0%,
-    rgba(18, 18, 24, 0.88) 50%,
-    rgba(12, 12, 18, 0.85) 100%
-  );
+  --glass-lightness: 0.14;
+  background:
+    linear-gradient(
+      135deg,
+      oklch(calc(var(--glass-lightness) + 0.03) 0.025 260 / 0.95) 0%,
+      oklch(var(--glass-lightness) 0.02 260 / 0.92) 50%,
+      oklch(calc(var(--glass-lightness) - 0.02) 0.015 260 / 0.88) 100%
+    );
   backdrop-filter: blur(40px) saturate(200%);
   -webkit-backdrop-filter: blur(40px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid oklch(1 0 0 / 0.15);
   box-shadow:
-    0 16px 64px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(255, 255, 255, 0.05),
-    inset 0 2px 0 rgba(255, 255, 255, 0.1),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+    0 16px 64px oklch(0 0 0 / 0.5),
+    0 0 0 1px oklch(1 0 0 / 0.05),
+    inset 0 2px 0 oklch(1 0 0 / 0.1),
+    inset 0 -1px 0 oklch(1 0 0 / 0.05);
 }
 
-/* Futuristic card style - More solid for better readability */
-.card-futuristic {
-  background: linear-gradient(
-    165deg,
-    rgba(22, 22, 28, 0.90) 0%,
-    rgba(15, 15, 20, 0.85) 100%
+/* ============================================
+   ANIMATED GRADIENT BORDER
+   Using @property for smooth hue animation
+   ============================================ */
+.animated-border {
+  --border-progress: 0%;
+  position: relative;
+  border-radius: 24px;
+  background: oklch(0.1 0.02 260);
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--accent-blue),
+    var(--accent-purple),
+    var(--accent-violet),
+    var(--accent-blue)
   );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: rotate-gradient 4s linear infinite;
+}
+
+@keyframes rotate-gradient {
+  to {
+    --gradient-angle: 360deg;
+  }
+}
+
+/* Static neon border with hover animation */
+.neon-border {
+  position: relative;
+}
+
+.neon-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--accent-blue),
+    var(--accent-purple),
+    var(--accent-violet)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: rotate-gradient 3s linear infinite paused;
+}
+
+.neon-border:hover::after {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+/* ============================================
+   FUTURISTIC CARD WITH MESH
+   ============================================ */
+.card-futuristic {
+  background:
+    radial-gradient(ellipse at 20% 0%, oklch(0.2 0.08 250 / 0.3), transparent 50%),
+    radial-gradient(ellipse at 80% 100%, oklch(0.2 0.08 280 / 0.2), transparent 50%),
+    linear-gradient(165deg, oklch(0.13 0.02 260 / 0.95), oklch(0.09 0.015 260 / 0.9));
   backdrop-filter: blur(30px);
   -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid oklch(1 0 0 / 0.1);
   border-radius: 24px;
   position: relative;
   overflow: hidden;
@@ -94,22 +247,31 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(10, 132, 255, 0.5),
-    rgba(94, 92, 230, 0.5),
+    var(--accent-blue),
+    var(--accent-purple),
     transparent
   );
+  opacity: 0.6;
 }
 
-/* Gradient Text */
+/* ============================================
+   MODERN GRADIENT TEXT
+   Using OKLCH for better color interpolation
+   ============================================ */
 .gradient-text {
-  background: linear-gradient(135deg, #ffffff 0%, #a1a1a6 100%);
+  background: linear-gradient(135deg, oklch(0.98 0.01 260), oklch(0.7 0.02 260));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-accent {
-  background: linear-gradient(135deg, #0a84ff 0%, #5e5ce6 50%, #bf5af2 100%);
+  background: linear-gradient(
+    135deg,
+    var(--accent-blue) 0%,
+    var(--accent-purple) 50%,
+    var(--accent-violet) 100%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -117,164 +279,266 @@ body {
 
 .gradient-text-animated {
   background: linear-gradient(
-    135deg,
-    #ffffff 0%,
-    #0a84ff 25%,
-    #5e5ce6 50%,
-    #bf5af2 75%,
-    #ffffff 100%
+    var(--gradient-angle),
+    oklch(0.98 0.01 260) 0%,
+    var(--accent-blue) 25%,
+    var(--accent-purple) 50%,
+    var(--accent-violet) 75%,
+    oklch(0.98 0.01 260) 100%
   );
-  background-size: 200% 200%;
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradient-shift 8s ease infinite;
+  animation: gradient-flow 6s ease infinite;
 }
 
-/* Subtle glow effects */
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; --gradient-angle: 135deg; }
+  50% { background-position: 100% 50%; --gradient-angle: 225deg; }
+  100% { background-position: 0% 50%; --gradient-angle: 135deg; }
+}
+
+/* ============================================
+   SCROLL-DRIVEN ANIMATIONS
+   Native CSS animations triggered by scroll
+   ============================================ */
+@keyframes fade-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Scroll-triggered reveal */
+.scroll-reveal {
+  animation: fade-slide-up linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 30%;
+}
+
+.scroll-scale {
+  animation: scale-in linear both;
+  animation-timeline: view();
+  animation-range: entry 0% entry 40%;
+}
+
+/* Scroll progress indicator using scroll-driven animation */
+.scroll-progress-native {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-violet));
+  transform-origin: left;
+  animation: scroll-progress linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes scroll-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* ============================================
+   BENTO GRID LAYOUT
+   Modern masonry-style grid
+   ============================================ */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(120px, auto);
+  gap: 16px;
+}
+
+.bento-item {
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bento-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px oklch(0 0 0 / 0.3);
+}
+
+/* Bento item sizes */
+.bento-wide { grid-column: span 2; }
+.bento-tall { grid-row: span 2; }
+.bento-large { grid-column: span 2; grid-row: span 2; }
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bento-large { grid-column: span 2; grid-row: span 1; }
+}
+
+/* ============================================
+   MODERN GLOW EFFECTS
+   Layered glows with OKLCH
+   ============================================ */
 .glow {
+  --glow-opacity: 0.15;
   box-shadow:
-    0 0 30px rgba(10, 132, 255, 0.15),
-    0 0 60px rgba(10, 132, 255, 0.1);
+    0 0 30px oklch(0.65 0.2 250 / var(--glow-opacity)),
+    0 0 60px oklch(0.65 0.2 250 / calc(var(--glow-opacity) * 0.6));
+  transition: --glow-opacity 0.3s ease;
+}
+
+.glow:hover {
+  --glow-opacity: 0.3;
 }
 
 .glow-accent {
   box-shadow:
-    0 0 40px rgba(10, 132, 255, 0.25),
-    0 0 80px rgba(94, 92, 230, 0.15),
-    0 0 120px rgba(191, 90, 242, 0.1);
+    0 0 40px oklch(0.65 0.2 250 / 0.25),
+    0 0 80px oklch(0.55 0.22 280 / 0.15),
+    0 0 120px oklch(0.6 0.25 310 / 0.1);
 }
 
 .glow-soft {
   box-shadow:
-    0 4px 24px rgba(10, 132, 255, 0.1),
-    0 0 48px rgba(10, 132, 255, 0.05);
+    0 4px 24px oklch(0.65 0.2 250 / 0.1),
+    0 0 48px oklch(0.65 0.2 250 / 0.05);
 }
 
-/* Neon border effect */
-.neon-border {
+/* Pulsing glow with @property */
+.glow-pulse {
+  --glow-opacity: 0.3;
+  box-shadow: 0 0 30px oklch(0.65 0.2 250 / var(--glow-opacity));
+  animation: pulse-glow-modern 3s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-modern {
+  0%, 100% { --glow-opacity: 0.3; }
+  50% { --glow-opacity: 0.6; }
+}
+
+/* ============================================
+   CONTAINER QUERIES
+   Component-level responsiveness
+   ============================================ */
+.card-container {
+  container-type: inline-size;
+  container-name: card;
+}
+
+@container card (max-width: 400px) {
+  .card-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .card-icon {
+    margin-bottom: 12px;
+  }
+}
+
+/* ============================================
+   MODERN BUTTON STYLES
+   ============================================ */
+.btn-modern {
   position: relative;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.neon-border::after {
+.btn-modern::before {
   content: '';
   position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, #0a84ff, #5e5ce6, #bf5af2);
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  inset: 0;
+  background: linear-gradient(
+    var(--gradient-angle),
+    var(--accent-blue),
+    var(--accent-purple)
+  );
   opacity: 0;
   transition: opacity 0.3s ease;
+  animation: rotate-gradient 3s linear infinite paused;
 }
 
-.neon-border:hover::after {
+.btn-modern:hover::before {
   opacity: 1;
+  animation-play-state: running;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.btn-modern span {
+  position: relative;
+  z-index: 1;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Animation utilities */
+/* ============================================
+   UTILITY ANIMATIONS
+   ============================================ */
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    opacity: 0.5;
-    box-shadow: 0 0 20px rgba(10, 132, 255, 0.2);
-  }
-  50% {
-    opacity: 0.8;
-    box-shadow: 0 0 40px rgba(10, 132, 255, 0.4);
-  }
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
-@keyframes border-glow {
-  0%, 100% {
-    border-color: rgba(10, 132, 255, 0.3);
-  }
-  50% {
-    border-color: rgba(94, 92, 230, 0.5);
-  }
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-shimmer { animation: shimmer 2s ease-in-out infinite; }
+
+/* ============================================
+   CUSTOM SCROLLBAR - Modern style
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+::-webkit-scrollbar-track {
+  background: oklch(0.1 0.01 260);
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--accent-blue), var(--accent-purple));
+  border-radius: 4px;
 }
 
-.animate-shimmer {
-  animation: shimmer 2s ease-in-out infinite;
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--accent-purple), var(--accent-violet));
 }
 
-.animate-border-glow {
-  animation: border-glow 3s ease-in-out infinite;
-}
-
-/* Selection */
+/* ============================================
+   SELECTION & FOCUS
+   ============================================ */
 ::selection {
-  background: rgba(10, 132, 255, 0.3);
-  color: #f5f5f7;
+  background: oklch(0.65 0.2 250 / 0.3);
+  color: var(--foreground);
 }
 
-/* Focus styles */
 *:focus-visible {
-  outline: 2px solid rgba(10, 132, 255, 0.5);
+  outline: 2px solid var(--accent-blue);
   outline-offset: 2px;
 }
 
-/* Canvas container */
+/* ============================================
+   CANVAS & GRID PATTERNS
+   ============================================ */
 .canvas-container {
   position: fixed;
   top: 0;
@@ -289,7 +553,16 @@ body {
   pointer-events: auto;
 }
 
-/* Tech tag styles */
+.grid-pattern {
+  background-image:
+    linear-gradient(oklch(0.65 0.2 250 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.65 0.2 250 / 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ============================================
+   TECH TAG WITH SHIMMER
+   ============================================ */
 .tech-tag {
   position: relative;
   overflow: hidden;
@@ -305,7 +578,7 @@ body {
   background: linear-gradient(
     90deg,
     transparent,
-    rgba(255, 255, 255, 0.1),
+    oklch(1 0 0 / 0.15),
     transparent
   );
   transition: left 0.5s ease;
@@ -315,25 +588,44 @@ body {
   left: 100%;
 }
 
-/* Futuristic grid pattern */
-.grid-pattern {
-  background-image:
-    linear-gradient(rgba(10, 132, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(10, 132, 255, 0.03) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Scan line effect */
-.scan-lines::after {
+/* ============================================
+   NOISE TEXTURE OVERLAY
+   ============================================ */
+.noise-overlay::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
+  opacity: 0.02;
   pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ============================================
+   VIEW TRANSITIONS API (for page transitions)
+   ============================================ */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+::view-transition-old(root) {
+  animation: fade-out 0.3s ease-out;
+}
+
+::view-transition-new(root) {
+  animation: fade-in 0.3s ease-in;
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

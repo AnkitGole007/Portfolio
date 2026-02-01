@@ -23,35 +23,57 @@ export default function ProfileHero() {
       transition={{ duration: 0.6 }}
       className="text-center z-10 relative"
     >
-      {/* Profile Image */}
+      {/* Profile Image with Animated Border */}
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
         className="relative inline-block mb-8"
       >
-        {/* Animated rings */}
+        {/* Animated gradient rings using CSS @property */}
+        <div className="absolute -inset-3 rounded-full animated-border opacity-60" />
+
+        {/* Orbiting ring 1 */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="absolute -inset-4 rounded-full border border-[#0a84ff]/30"
+          className="absolute -inset-5 rounded-full"
+          style={{
+            border: '1px solid oklch(0.65 0.2 250 / 0.25)',
+          }}
         />
+
+        {/* Orbiting ring 2 */}
         <motion.div
           animate={{ rotate: -360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-          className="absolute -inset-6 rounded-full border border-[#5e5ce6]/20"
+          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+          className="absolute -inset-7 rounded-full"
+          style={{
+            border: '1px solid oklch(0.55 0.22 280 / 0.15)',
+          }}
         />
+
+        {/* Orbiting ring 3 */}
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          className="absolute -inset-8 rounded-full border border-[#bf5af2]/10"
+          transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+          className="absolute -inset-9 rounded-full"
+          style={{
+            border: '1px solid oklch(0.6 0.25 310 / 0.1)',
+          }}
         />
 
-        {/* Glow effect */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a84ff] via-[#5e5ce6] to-[#bf5af2] rounded-full blur-2xl opacity-40 animate-pulse-glow" />
+        {/* Pulsing glow effect */}
+        <div
+          className="absolute inset-0 rounded-full blur-2xl glow-pulse"
+          style={{
+            background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple), var(--accent-violet))',
+            opacity: 0.4,
+          }}
+        />
 
-        {/* Image container */}
-        <div className="relative w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden border-2 border-white/20">
+        {/* Image container with glass effect */}
+        <div className="relative w-36 h-36 md:w-40 md:h-40 rounded-full overflow-hidden glass-strong">
           <Image
             src={`${basePath}/profile.jpeg`}
             alt="Ankit Gole"
@@ -59,10 +81,17 @@ export default function ProfileHero() {
             className="object-cover"
             priority
           />
+          {/* Subtle inner glow */}
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none"
+            style={{
+              boxShadow: 'inset 0 0 30px oklch(0.65 0.2 250 / 0.2)',
+            }}
+          />
         </div>
       </motion.div>
 
-      {/* Name */}
+      {/* Name with enhanced gradient */}
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -72,7 +101,7 @@ export default function ProfileHero() {
         <span className="gradient-text-animated">Ankit Gole</span>
       </motion.h1>
 
-      {/* Typing Title */}
+      {/* Typing Title with OKLCH accent */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -81,7 +110,8 @@ export default function ProfileHero() {
       >
         <TypingEffect
           texts={roles}
-          className="text-xl md:text-2xl text-[#0a84ff] font-medium"
+          className="text-xl md:text-2xl font-medium"
+          style={{ color: 'var(--accent-blue)' }}
           typingSpeed={80}
           deletingSpeed={40}
           pauseTime={2500}
@@ -93,17 +123,19 @@ export default function ProfileHero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5, duration: 0.5 }}
-        className="text-white/50 text-sm md:text-base mb-2"
+        className="text-sm md:text-base mb-2"
+        style={{ color: 'oklch(0.7 0.02 260)' }}
       >
         Masters in Artificial Intelligence @ WPI
       </motion.p>
 
-      {/* Tagline */}
+      {/* Tagline with subtle gradient */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="text-white/30 text-sm max-w-md mx-auto mb-4"
+        className="text-sm max-w-md mx-auto mb-4"
+        style={{ color: 'oklch(0.55 0.02 260)' }}
       >
         Building intelligent systems with LLMs, RAG, and Diffusion Models
       </motion.p>
@@ -111,15 +143,25 @@ export default function ProfileHero() {
       {/* Status Badge */}
       <StatusBadge status="available" />
 
-      {/* Command palette hint */}
+      {/* Command palette hint with modern styling */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
-        className="mt-8 flex items-center justify-center gap-2 text-white/20 text-xs"
+        className="mt-8 flex items-center justify-center gap-2 text-xs"
+        style={{ color: 'oklch(0.5 0.02 260)' }}
       >
         <span>Press</span>
-        <kbd className="px-2 py-1 rounded bg-white/5 border border-white/10 font-mono">⌘K</kbd>
+        <kbd
+          className="px-2.5 py-1.5 rounded-lg font-mono text-[11px] transition-all duration-200 hover:scale-105"
+          style={{
+            background: 'oklch(0.15 0.02 260)',
+            border: '1px solid oklch(1 0 0 / 0.1)',
+            boxShadow: '0 2px 8px oklch(0 0 0 / 0.3), inset 0 1px 0 oklch(1 0 0 / 0.05)',
+          }}
+        >
+          ⌘K
+        </kbd>
         <span>to navigate</span>
       </motion.div>
     </motion.div>

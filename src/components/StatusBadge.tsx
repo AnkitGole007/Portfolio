@@ -10,18 +10,21 @@ export default function StatusBadge({ status = 'available' }: StatusBadgeProps) 
   const statusConfig = {
     available: {
       text: 'Open to Opportunities',
-      color: '#30d158',
-      bgColor: 'rgba(48, 209, 88, 0.1)',
+      color: 'var(--accent-green)',
+      bgColor: 'oklch(0.7 0.2 145 / 0.1)',
+      borderColor: 'oklch(0.7 0.2 145 / 0.25)',
     },
     busy: {
       text: 'Currently Employed',
-      color: '#ff9500',
-      bgColor: 'rgba(255, 149, 0, 0.1)',
+      color: 'var(--accent-amber)',
+      bgColor: 'oklch(0.75 0.18 70 / 0.1)',
+      borderColor: 'oklch(0.75 0.18 70 / 0.25)',
     },
     open: {
       text: 'Open for Freelance',
-      color: '#0a84ff',
-      bgColor: 'rgba(10, 132, 255, 0.1)',
+      color: 'var(--accent-blue)',
+      bgColor: 'oklch(0.65 0.2 250 / 0.1)',
+      borderColor: 'oklch(0.65 0.2 250 / 0.25)',
     },
   };
 
@@ -32,18 +35,19 @@ export default function StatusBadge({ status = 'available' }: StatusBadgeProps) 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.7, duration: 0.4 }}
-      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border"
+      className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full transition-all duration-300 hover:scale-105"
       style={{
         backgroundColor: config.bgColor,
-        borderColor: `${config.color}30`,
+        border: `1px solid ${config.borderColor}`,
+        boxShadow: `0 4px 20px ${config.bgColor}`,
       }}
     >
-      {/* Pulsing dot */}
-      <span className="relative flex h-2 w-2">
+      {/* Pulsing dot with glow */}
+      <span className="relative flex h-2.5 w-2.5">
         <motion.span
           animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.7, 0, 0.7],
+            scale: [1, 1.8, 1],
+            opacity: [0.6, 0, 0.6],
           }}
           transition={{
             duration: 2,
@@ -54,12 +58,15 @@ export default function StatusBadge({ status = 'available' }: StatusBadgeProps) 
           style={{ backgroundColor: config.color }}
         />
         <span
-          className="relative inline-flex rounded-full h-2 w-2"
-          style={{ backgroundColor: config.color }}
+          className="relative inline-flex rounded-full h-2.5 w-2.5"
+          style={{
+            backgroundColor: config.color,
+            boxShadow: `0 0 8px ${config.color}`,
+          }}
         />
       </span>
       <span
-        className="text-xs font-medium"
+        className="text-xs font-semibold tracking-wide"
         style={{ color: config.color }}
       >
         {config.text}

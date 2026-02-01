@@ -5,8 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/ai-portfolio' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/ai-portfolio/' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/Portfolio' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/Portfolio/' : '',
   trailingSlash: true,
 };
 

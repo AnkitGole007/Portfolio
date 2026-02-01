@@ -2,17 +2,12 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
 import NavigationIsland from './NavigationIsland';
 import GeminiChat from './GeminiChat';
 import ScrollProgress from './ScrollProgress';
+import AmbientBackground from './AmbientBackground';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-
-const NeuralNetwork3D = dynamic(() => import('./NeuralNetwork3D'), {
-  ssr: false,
-  loading: () => <div className="fixed inset-0 bg-[#050505]" />,
-});
 
 interface SectionLayoutProps {
   children: React.ReactNode;
@@ -29,14 +24,8 @@ export default function SectionLayout({ children, title, subtitle }: SectionLayo
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
 
-      {/* 3D Background */}
-      <NeuralNetwork3D />
-
-      {/* Gradient overlays for depth */}
-      <div className="fixed inset-0 pointer-events-none z-[1]">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505]/80" />
-        <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-[#050505]/60 to-transparent" />
-      </div>
+      {/* Ambient Background */}
+      <AmbientBackground />
 
       {/* Back Button */}
       <motion.button

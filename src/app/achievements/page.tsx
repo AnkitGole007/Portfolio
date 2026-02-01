@@ -8,7 +8,9 @@ import {
   Star,
   Target,
   TrendingUp,
-  Zap
+  Zap,
+  BadgeCheck,
+  GraduationCap
 } from 'lucide-react';
 
 const achievements = [
@@ -38,6 +40,34 @@ const achievements = [
     icon: <Star size={28} />,
     description: 'Maintaining exceptional academic performance while conducting research, TA duties, and internships.',
     color: '#5e5ce6',
+  },
+];
+
+const certifications = [
+  {
+    title: 'Microsoft AI Classroom Series',
+    issuer: 'Microsoft',
+    color: '#0a84ff',
+  },
+  {
+    title: 'Supervised Learning Essential Training',
+    issuer: 'LinkedIn Learning',
+    color: '#5e5ce6',
+  },
+  {
+    title: 'Communicating with Confidence',
+    issuer: 'LinkedIn Learning',
+    color: '#bf5af2',
+  },
+  {
+    title: 'Communication within Teams',
+    issuer: 'LinkedIn Learning',
+    color: '#30d158',
+  },
+  {
+    title: 'Rock Your LinkedIn Profile',
+    issuer: 'LinkedIn Learning',
+    color: '#ff9500',
   },
 ];
 
@@ -178,6 +208,43 @@ export default function AchievementsPage() {
                 <h4 className="text-white font-medium mb-2">{item.title}</h4>
                 <p className="text-white/50 text-sm leading-relaxed">{item.impact}</p>
               </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Certifications */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="glass rounded-3xl p-8"
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <div className="p-3 rounded-xl bg-gradient-to-br from-[#0a84ff]/20 to-[#5e5ce6]/20">
+              <BadgeCheck size={24} className="text-[#0a84ff]" />
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white">Certifications</h3>
+              <p className="text-white/40 text-sm">Professional development & learning</p>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {certifications.map((cert, idx) => (
+              <motion.div
+                key={cert.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.8 + idx * 0.05 }}
+                className="p-4 rounded-xl bg-white/[0.03] border border-white/5
+                         hover:border-white/15 transition-all duration-300"
+              >
+                <div
+                  className="w-2 h-2 rounded-full mb-3"
+                  style={{ backgroundColor: cert.color }}
+                />
+                <h4 className="text-white text-sm font-medium mb-1">{cert.title}</h4>
+                <p className="text-white/40 text-xs">{cert.issuer}</p>
+              </motion.div>
             ))}
           </div>
         </motion.div>

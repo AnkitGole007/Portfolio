@@ -11,20 +11,27 @@ import {
   Calendar,
   Github,
   Linkedin,
-  Sparkles
+  Sparkles,
+  Languages
 } from 'lucide-react';
 
 const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
 
 const personalInfo = [
   { icon: <MapPin size={16} />, label: 'Location', value: 'Worcester, MA' },
-  { icon: <Mail size={16} />, label: 'Email', value: 'aggole@wpi.edu' },
+  { icon: <Mail size={16} />, label: 'Email', value: 'ankit17.gole@gmail.com' },
   { icon: <Phone size={16} />, label: 'Phone', value: '+1 (774) 525-2916' },
 ];
 
 const socialLinks = [
   { icon: <Github size={20} />, label: 'GitHub', href: 'https://github.com/AnkitGole007' },
   { icon: <Linkedin size={20} />, label: 'LinkedIn', href: 'https://linkedin.com/in/ankit-gole' },
+];
+
+const languages = [
+  { name: 'English', level: 'Full Professional', color: '#0a84ff' },
+  { name: 'Hindi', level: 'Full Professional', color: '#5e5ce6' },
+  { name: 'Marathi', level: 'Full Professional', color: '#bf5af2' },
 ];
 
 const expertise = [
@@ -191,6 +198,29 @@ export default function AboutPage() {
               <p className="text-white/50 text-sm">
                 Foundation in computer science, algorithms, and software development
               </p>
+            </div>
+          </div>
+
+          {/* Languages */}
+          <div className="mt-6 pt-6 border-t border-white/5">
+            <div className="flex items-center gap-3 mb-4">
+              <Languages size={18} className="text-[#0a84ff]" />
+              <h4 className="text-white font-medium">Languages</h4>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {languages.map((lang) => (
+                <div
+                  key={lang.name}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.03] border border-white/5"
+                >
+                  <div
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: lang.color }}
+                  />
+                  <span className="text-white text-sm">{lang.name}</span>
+                  <span className="text-white/40 text-xs">({lang.level})</span>
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>

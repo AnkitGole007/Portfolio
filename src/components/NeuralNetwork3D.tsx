@@ -185,7 +185,22 @@ export default function NeuralNetwork3D() {
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
         dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true }}
+        gl={{
+          antialias: true,
+          alpha: true,
+          powerPreference: 'default',
+          failIfMajorPerformanceCaveat: false,
+        }}
+        onCreated={({ gl }) => {
+          const canvas = gl.domElement;
+          canvas.addEventListener('webglcontextlost', (e) => {
+            e.preventDefault();
+            console.log('WebGL context lost - will attempt recovery');
+          });
+          canvas.addEventListener('webglcontextrestored', () => {
+            console.log('WebGL context restored');
+          });
+        }}
       >
         <color attach="background" args={['#050505']} />
         <fog attach="fog" args={['#050505', 5, 15]} />

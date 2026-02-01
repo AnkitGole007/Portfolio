@@ -8,7 +8,6 @@ import GeminiChat from '@/components/GeminiChat';
 import CommandPalette from '@/components/CommandPalette';
 import LoadingScreen from '@/components/LoadingScreen';
 import CursorParticles from '@/components/CursorParticles';
-import AmbientBackground from '@/components/AmbientBackground';
 import { MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
@@ -40,10 +39,7 @@ export default function Home() {
       {/* Command Palette */}
       <CommandPalette isOpen={isCommandOpen} onClose={() => setIsCommandOpen(false)} />
 
-      <main className="relative min-h-screen overflow-hidden">
-        {/* Ambient Background */}
-        <AmbientBackground />
-
+      <main className="relative min-h-screen overflow-hidden bg-[var(--background)]">
         {/* Main Content */}
         <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4">
           <ProfileHero />

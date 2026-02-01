@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import NavigationIsland from './NavigationIsland';
 import GeminiChat from './GeminiChat';
 import ScrollProgress from './ScrollProgress';
-import AmbientBackground from './AmbientBackground';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -20,12 +19,9 @@ export default function SectionLayout({ children, title, subtitle }: SectionLayo
   const router = useRouter();
 
   return (
-    <main className="relative min-h-screen">
+    <main className="relative min-h-screen bg-[var(--background)]">
       {/* Scroll Progress Indicator */}
       <ScrollProgress />
-
-      {/* Ambient Background */}
-      <AmbientBackground />
 
       {/* Back Button */}
       <motion.button

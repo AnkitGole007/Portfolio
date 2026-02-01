@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ankit Gole - AI Developer Portfolio
+
+A modern, immersive portfolio website built with Next.js 14, featuring 3D neural network visualizations, Apple-inspired liquid glass UI, and an intelligent chatbot.
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with TypeScript
+- **3D Graphics**: React Three Fiber + Three.js
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Icons**: Lucide React
+
+## Features
+
+- Interactive 3D neural network background
+- Apple-style liquid glass UI design
+- Floating navigation shortcuts
+- Smooth page transitions
+- AI-powered chat assistant
+- Fully responsive design
+- Static export for GitHub Pages
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npx serve out
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment to GitHub Pages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Automatic Deployment (GitHub Actions)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Push your code to a GitHub repository
+2. Go to repository Settings > Pages
+3. Set Source to "GitHub Actions"
+4. The workflow will automatically build and deploy on push to `main`
 
-## Learn More
+### Manual Deployment
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Build the project
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# The static files will be in the 'out' directory
+# Deploy the contents of 'out' to your hosting provider
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
+```
+src/
+├── app/
+│   ├── about/          # About page
+│   ├── achievements/   # Achievements page
+│   ├── api/chat/       # Chat API route
+│   ├── contact/        # Contact page
+│   ├── experience/     # Experience page
+│   ├── projects/       # Projects page
+│   ├── skills/         # Skills page
+│   ├── globals.css     # Global styles
+│   ├── layout.tsx      # Root layout
+│   └── page.tsx        # Home page
+├── components/
+│   ├── FloatingShortcuts.tsx    # Home page navigation
+│   ├── GeminiChat.tsx           # AI chatbot
+│   ├── LinkedInHighlights.tsx   # Sidebar highlights
+│   ├── NavigationIsland.tsx     # Bottom navigation
+│   ├── NeuralNetwork3D.tsx      # 3D background
+│   ├── ProfileHero.tsx          # Profile section
+│   └── SectionLayout.tsx        # Page layout wrapper
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Customization
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Update Profile Photo
+
+Replace `public/profile.jpeg` with your own photo.
+
+### Update Content
+
+Edit the data in each page file under `src/app/` to customize:
+- Personal information
+- Work experience
+- Projects
+- Skills
+- Achievements
+
+## License
+
+MIT License - feel free to use this template for your own portfolio!
+
+---
+
+Built by Ankit Gole | [GitHub](https://github.com/AnkitGole007) | [LinkedIn](https://linkedin.com/in/ankit-gole)

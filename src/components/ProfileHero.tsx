@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
+
 export default function ProfileHero() {
   return (
     <motion.div
@@ -21,7 +23,7 @@ export default function ProfileHero() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a84ff] to-[#5e5ce6] rounded-full blur-xl opacity-50 animate-pulse-glow" />
         <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-white/20 glass">
           <Image
-            src="/profile.jpeg"
+            src={`${basePath}/profile.jpeg`}
             alt="Ankit Gole"
             fill
             className="object-cover"

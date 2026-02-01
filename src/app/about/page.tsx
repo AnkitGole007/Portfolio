@@ -3,6 +3,9 @@
 import SectionLayout from '@/components/SectionLayout';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+
+const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
+
 import {
   MapPin,
   Mail,
@@ -39,7 +42,7 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0a84ff] to-[#5e5ce6] rounded-2xl blur-xl opacity-30" />
             <div className="relative w-40 h-40 rounded-2xl overflow-hidden border border-white/10">
               <Image
-                src="/profile.jpeg"
+                src={`${basePath}/profile.jpeg`}
                 alt="Ankit Gole"
                 fill
                 className="object-cover"

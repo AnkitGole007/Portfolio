@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import NavigationIsland from './NavigationIsland';
 import GeminiChat from './GeminiChat';
+import ScrollProgress from './ScrollProgress';
 import { ArrowLeft, Sparkles } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
@@ -25,6 +26,9 @@ export default function SectionLayout({ children, title, subtitle }: SectionLayo
 
   return (
     <main className="relative min-h-screen">
+      {/* Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* 3D Background */}
       <NeuralNetwork3D />
 

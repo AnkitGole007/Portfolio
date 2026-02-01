@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import TypingEffect from './TypingEffect';
+import StatusBadge from './StatusBadge';
 
 const basePath = process.env.NODE_ENV === 'production' ? '/Portfolio' : '';
 
@@ -102,10 +103,13 @@ export default function ProfileHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 0.5 }}
-        className="text-white/30 text-sm max-w-md mx-auto"
+        className="text-white/30 text-sm max-w-md mx-auto mb-4"
       >
         Building intelligent systems with LLMs, RAG, and Diffusion Models
       </motion.p>
+
+      {/* Status Badge */}
+      <StatusBadge status="available" />
 
       {/* Command palette hint */}
       <motion.div

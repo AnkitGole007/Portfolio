@@ -7,7 +7,6 @@ import FloatingShortcuts from '@/components/FloatingShortcuts';
 import LinkedInHighlights from '@/components/LinkedInHighlights';
 import GeminiChat from '@/components/GeminiChat';
 import CommandPalette from '@/components/CommandPalette';
-import EasterEgg from '@/components/EasterEgg';
 import LoadingScreen from '@/components/LoadingScreen';
 import CursorParticles from '@/components/CursorParticles';
 import { MessageCircle } from 'lucide-react';
@@ -42,11 +41,8 @@ export default function Home() {
       {/* Loading Screen */}
       <LoadingScreen />
 
-      {/* Cursor Particles */}
+      {/* Tesla Coil Sparkles */}
       <CursorParticles />
-
-      {/* Easter Egg */}
-      <EasterEgg />
 
       {/* Command Palette */}
       <CommandPalette isOpen={isCommandOpen} onClose={() => setIsCommandOpen(false)} />

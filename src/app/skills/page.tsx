@@ -115,15 +115,15 @@ export default function SkillsPage() {
               <motion.div
                 whileHover={{ rotate: 10, scale: 1.1 }}
                 className="p-3 rounded-xl"
-                style={{ backgroundColor: `${category.color}15` }}
+                style={{ backgroundColor: `${category.color}20` }}
               >
                 <span style={{ color: category.color }}>{category.icon}</span>
               </motion.div>
-              <h3 className="text-lg font-semibold text-white">{category.title}</h3>
+              <h3 className="text-xl font-semibold text-white">{category.title}</h3>
             </div>
 
             {/* Skills */}
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2.5">
               {category.skills.map((skill, sIdx) => (
                 <motion.span
                   key={skill}
@@ -131,11 +131,11 @@ export default function SkillsPage() {
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: idx * 0.05 + sIdx * 0.02 }}
                   whileHover={{ scale: 1.05 }}
-                  className="tech-tag px-3 py-1.5 rounded-full text-xs font-medium
+                  className="tech-tag px-4 py-2 rounded-full text-sm font-medium
                            border cursor-default transition-all duration-300"
                   style={{
-                    backgroundColor: `${category.color}08`,
-                    borderColor: `${category.color}20`,
+                    backgroundColor: `${category.color}12`,
+                    borderColor: `${category.color}30`,
                     color: category.color,
                   }}
                 >
